@@ -247,3 +247,66 @@
 
             <ul class="playlist" id="lessonsList">
                 <!-- يتم عرض الدروس تلقائياً عبر السكربت -->
+            </ul>
+        </aside>
+
+    </main>
+
+    <!-- أسفل الصفحة -->
+    <footer>
+        &copy; جميع الحقوق محفوظة — رواق الخط العربي / وائل دهشان
+    </footer>
+
+  
+
+        let lessons = defaultLessons;
+        let activeId = lessons.length > 0 ? lessons[0].id : null;
+
+        // تحويل روابط يوتيوب إلى رابط تشغيل مدمج Embed
+        function getEmbedUrl(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            if (match && match[2].length === 11) {
+                return "https://www.youtube.com/embed/" + match[2] + "?rel=0";
+            }
+            return url;
+        }
+
+        // عرض الدرس المختار
+        function showLesson(id) {
+            activeId = id;
+            const lesson = lessons.find(item => item.id === id);
+            if (!lesson) return;
+
+            document.getElementById('lessonTitle').textContent = lesson.title;
+            document.getElementById('lessonCategory').textContent = lesson.category;
+            document.getElementById('lessonNotes').textContent = lesson.notes || "لا توجد ملاحظات إضافية لهذا الدرس.";
+            document.getElementById('mainIframe').src = getEmbedUrl(lesson.url);
+
+            renderPlaylist();
+        }
+
+        // بناء قائمة الدروس في الشريط الجانبي
+        function renderPlaylist() {
+            const listElement = document.getElementById('lessonsList');
+            listElement.innerHTML = '';
+
+            lessons.forEach(lesson => {
+                const li = document.createElement('li');
+                li.className = 'playlist-item ' + (lesson.id === activeId ? 'active' : '');
+                li.innerHTML = `
+                    <h4>${lesson.title}</h4>
+                    <small>التصنيف: ${lesson.category}</small>
+                `;
+                li.onclick = () => showLesson(lesson.id);
+                listElement.appendChild(li);
+            });
+        }
+
+        // بدء التشغيل التلقائي عند فتح الصفحة
+        if (activeId !== null) {
+            showLesson(activeId);
+        }
+    </script>
+</body>
+</html>
