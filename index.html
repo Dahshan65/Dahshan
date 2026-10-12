@@ -89,9 +89,6 @@
             border-radius: 8px;
             background: #111827;
             margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .video-frame-wrap iframe {
@@ -101,26 +98,6 @@
             width: 100%;
             height: 100%;
             border: none;
-        }
-
-        .empty-player-notice {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #d1d5db;
-            text-align: center;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            width: 85%;
-        }
-
-        .empty-player-notice span {
-            color: var(--accent);
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
         }
 
         .lesson-info h2 {
@@ -186,16 +163,6 @@
             padding-left: 4px;
         }
 
-        .playlist-empty {
-            text-align: center;
-            padding: 2.5rem 1rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            background: #fafafa;
-            border-radius: 8px;
-            border: 1px dashed var(--border);
-        }
-
         .playlist-item {
             padding: 0.9rem;
             border-radius: 8px;
@@ -253,28 +220,23 @@
         
         <!-- مشغل الفيديو والشرح -->
         <section class="video-box">
-            <div class="video-frame-wrap" id="videoFrameContainer">
+            <div class="video-frame-wrap">
                 <iframe 
                     id="mainIframe"
                     src="" 
                     title="مشغل الفيديو" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen
-                    style="display: none;">
+                    allowfullscreen>
                 </iframe>
-                <div class="empty-player-notice" id="emptyNotice">
-                    <span>مرحباً بكم في رواق الخط العربي</span>
-                    سيتم نشر الدروس المرئية قريباً بإذن الله تعالى.
-                </div>
             </div>
 
             <div class="lesson-info">
-                <span class="category-tag" id="lessonCategory">بانتظار إضافة الدروس</span>
-                <h2 id="lessonTitle">رواق الخط العربي</h2>
+                <span class="category-tag" id="lessonCategory"></span>
+                <h2 id="lessonTitle"></h2>
                 
                 <div class="notes-card">
-                    <strong>الإرشادات والملاحظات:</strong>
-                    <p id="lessonNotes">تابع المنصة باستمرار للاطلاع على الشروح المرئية لموازين الحروف وقواعد الضبط والإعراب.</p>
+                    <strong>القواعد والشواهد التعليمية:</strong>
+                    <p id="lessonNotes"></p>
                 </div>
             </div>
         </section>
@@ -284,7 +246,7 @@
             <h2 class="sidebar-title">قائمة الدروس</h2>
 
             <ul class="playlist" id="lessonsList">
-                <!-- يتم تعبئة الدروس برمجياً عند إضافتها في السكربت -->
+                <!-- يتم عرض الدروس تلقائياً عبر السكربت -->
             </ul>
         </aside>
 
@@ -297,18 +259,36 @@
 
     <!-- سكربت التحكم والتفاعل -->
     <script>
-        // قائمة الدروس فارغة وجاهزة لإضافة دروسك الخاصة
+        // قائمة الدروس الخاصة بك المربوطة بمقاطع يوتيوب
         const defaultLessons = [
-            /*
-            ضع دروسك هنا مستقبلاً بهذا التنسيق:
             {
                 id: 1,
-                title: "عنوان درسك الأول",
-                category: "خط النسخ",
-                url: "https://www.youtube.com/watch?v=...",
-                notes: "ملاحظات وتوجيهات الدرس هنا."
+                title: "الدرس الأول: أقسام الكلام - الاسم وعلاماته",
+                category: "قواعد وضبط",
+                url: "https://www.youtube.com/watch?v=GbqZbAgqbes",
+                notes: "الاسم كلمة تدل على إنسان، حيوان، نبات، جماد، أو معنى غير مقترن بزمن. ومن أهم علاماته: قبول دخول (الـ) التعريف، التنوين بأنواعه، وقبول حروف الجر."
+            },
+            {
+                id: 2,
+                title: "الدرس الثاني: أقسام الكلام - الفعل وأنواعه",
+                category: "قواعد وضبط",
+                url: "https://www.youtube.com/watch?v=O4XDwfm0KzU",
+                notes: "الفعل كلمة تدل على حدث مقترن بزمن محدد؛ وينقسم إلى: ماضٍ (وقع وانتهى)، ومضارع (يدل على الحال أو الاستقبال ويبدأ بأحرف نأتي)، وأمر (يفيد طلب الفعل)."
+            },
+            {
+                id: 3,
+                title: "الدرس الثالث: علامات الفعل والتمييز بين أقسامه",
+                category: "قواعد وضبط",
+                url: "https://www.youtube.com/watch?v=frzL_pSAVAA",
+                notes: "من علامات الماضي قبول تاء الفاعل وتاء التأنيث الساكنة (كتبتْ/كتبتُ)، ومن علامات المضارع قبول دخول (لم/لن)، وفعل الأمر يدل على الطلب مع قبوله ياء المخاطبة."
+            },
+            {
+                id: 4,
+                title: "الدرس السابع: أنواع الفاعل (الاسم الظاهر والضمير)",
+                category: "قواعد وضبط",
+                url: "https://www.youtube.com/watch?v=Pvxl5xHKoZk",
+                notes: "الفاعل اسم مرفوع يدل على من قام بالفعل؛ ويأتي على ثلاثة أوجه: اسماً ظاهراً (حضر المعلمُ)، ضميراً متصلاً (كتبتُ الدرس)، أو ضميراً مستتراً (أكتبُ الدرس - تقديره أنا)."
             }
-            */
         ];
 
         let lessons = defaultLessons;
@@ -330,14 +310,10 @@
             const lesson = lessons.find(item => item.id === id);
             if (!lesson) return;
 
-            document.getElementById('emptyNotice').style.display = 'none';
-            const iframe = document.getElementById('mainIframe');
-            iframe.style.display = 'block';
-            iframe.src = getEmbedUrl(lesson.url);
-
             document.getElementById('lessonTitle').textContent = lesson.title;
             document.getElementById('lessonCategory').textContent = lesson.category;
             document.getElementById('lessonNotes').textContent = lesson.notes || "لا توجد ملاحظات إضافية لهذا الدرس.";
+            document.getElementById('mainIframe').src = getEmbedUrl(lesson.url);
 
             renderPlaylist();
         }
@@ -346,11 +322,6 @@
         function renderPlaylist() {
             const listElement = document.getElementById('lessonsList');
             listElement.innerHTML = '';
-
-            if (lessons.length === 0) {
-                listElement.innerHTML = '<li class="playlist-empty">لا توجد دروس مضافة حالياً.</li>';
-                return;
-            }
 
             lessons.forEach(lesson => {
                 const li = document.createElement('li');
@@ -364,8 +335,7 @@
             });
         }
 
-        // تشغيل البداية
-        renderPlaylist();
+        // بدء التشغيل التلقائي عند فتح الصفحة
         if (activeId !== null) {
             showLesson(activeId);
         }
