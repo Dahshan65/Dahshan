@@ -43,7 +43,7 @@
         }
 
         header h1 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             margin-bottom: 0.3rem;
             color: #ffffff;
         }
@@ -143,7 +143,6 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            max-height: 80vh;
         }
 
         .sidebar-title {
@@ -153,18 +152,70 @@
             padding-bottom: 0.5rem;
         }
 
+        /* استمارة إضافة فيديو جديد */
+        .add-box {
+            background: #fdfdfd;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .add-box h3 {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .input-group {
+            margin-bottom: 0.7rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
         /* عناصر القائمة */
         .playlist {
             list-style: none;
             overflow-y: auto;
+            max-height: 400px;
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
-            padding-left: 4px;
+            gap: 0.5rem;
         }
 
         .playlist-item {
-            padding: 0.9rem;
+            padding: 0.8rem;
             border-radius: 8px;
             border: 1px solid var(--border);
             cursor: pointer;
@@ -185,14 +236,13 @@
         }
 
         .playlist-item h4 {
-            font-size: 0.95rem;
-            margin-bottom: 0.3rem;
-            color: var(--text-main);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
         }
 
         .playlist-item small {
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         /* أسفل الصفحة */
@@ -200,7 +250,7 @@
             background: var(--card-bg);
             border-top: 1px solid var(--border);
             text-align: center;
-            padding: 1.2rem;
+            padding: 1rem;
             font-size: 0.85rem;
             color: var(--text-muted);
             margin-top: auto;
@@ -223,7 +273,7 @@
             <div class="video-frame-wrap">
                 <iframe 
                     id="mainIframe"
-                    src="" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
                     title="مشغل الفيديو" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
@@ -231,22 +281,56 @@
             </div>
 
             <div class="lesson-info">
-                <span class="category-tag" id="lessonCategory"></span>
-                <h2 id="lessonTitle"></h2>
+                <span class="category-tag" id="lessonCategory">خط النسخ</span>
+                <h2 id="lessonTitle">الدرس الأول: ميزان حرف الألف وميلانه في خط النسخ</h2>
                 
                 <div class="notes-card">
                     <strong>القواعد والشواهد التعليمية:</strong>
-                    <p id="lessonNotes"></p>
+                    <p id="lessonNotes">يُقدّر طول الألف في خط النسخ بخمس نقاط بميزان القلم، مع ميلان يسير جداً جهة اليسار من الأعلى لتأمين الرشاقة والتوازن البصري.</p>
                 </div>
             </div>
         </section>
 
-        <!-- القائمة الجانبية للدروس -->
+        <!-- القائمة الجانبية وإضافة الدروس -->
         <aside class="sidebar">
             <h2 class="sidebar-title">قائمة الدروس</h2>
 
+            <!-- نموذج إضافة درس جديد -->
+            <div class="add-box">
+                <h3>+ إضافة درس مرئي جديد</h3>
+                <form id="addForm">
+                    <div class="input-group">
+                        <label for="newTitle">عنوان الدرس:</label>
+                        <input type="text" id="newTitle" placeholder="مثال: رسم حرف الراء والزاي" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newCategory">التصنيف الفني:</label>
+                        <select id="newCategory">
+                            <option value="خط النسخ">خط النسخ</option>
+                            <option value="خط الرقعة">خط الرقعة</option>
+                            <option value="اتصال الحروف">اتصال الحروف والقنطرة</option>
+                            <option value="قواعد وإعراب">قواعد وضبط وإعراب</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newUrl">رابط يوتيوب:</label>
+                        <input type="url" id="newUrl" placeholder="https://www.youtube.com/watch?v=..." required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newNotes">القواعد والشواهد:</label>
+                        <textarea id="newNotes" rows="2" placeholder="اكتب القواعد والتوجيهات هنا..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">حفظ الدرس في القائمة</button>
+                </form>
+            </div>
+
+            <!-- قائمة الفيديوهات -->
             <ul class="playlist" id="lessonsList">
-                <!-- يتم عرض الدروس تلقائياً عبر السكربت -->
+                <!-- يتم تعبئة الدروس عبر الجافاسكريبت أو افتراضياً -->
             </ul>
         </aside>
 
@@ -257,22 +341,61 @@
         &copy; جميع الحقوق محفوظة — رواق الخط العربي / وائل دهشان
     </footer>
 
-  
+    <!-- سكربت التحكم والتفاعل -->
+    <script>
+        // الدروس الافتراضية
+        const defaultLessons = [{
+        id: 5,
+        title: "عنوان درسك الجديد هنا",
+        category: "خط النسخ",
+        url: "رابط فيديو يوتيوب هنا",
+        notes: "الشرح والملاحظات الخاصة بالدرس هنا."
+    },
+            {
+                id: 1,
+                title: "الدرس الأول: ميزان حرف الألف وميلانه في خط النسخ",
+                category: "خط النسخ",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "يُقدّر طول الألف في خط النسخ بخمس نقاط بميزان القلم، مع ميلان يسير جداً جهة اليسار من الأعلى لتأمين الرشاقة والتوازن البصري."
+            },
+            {
+                id: 2,
+                title: "الدرس الثاني: قواعد رسم حرفي الباء والتاء",
+                category: "خط النسخ",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "بداية سنّ الباء تبدأ بنقطة مائلة، والاتساع الأفقي يستقر على السطر بمقدار 4 نقاط، مع الارتفاع الرشيق في الطرف الأخير."
+            },
+            {
+                id: 3,
+                title: "الدرس الثالث: فن القنطرة وحالات الوصل بين الأسنان",
+                category: "اتصال الحروف",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "تُستخدم القنطرة لرفع سنّة الحرف فوق السطر عند تتابع الأسنان (مثل: بيت، نبات) لتجنب تشابه الكلمات وتوضيح الحركات."
+            },
+            {
+                id: 4,
+                title: "الدرس الرابع: قواعد التشكيل والضبط الإعرابي",
+                category: "قواعد وإعراب",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "يُراعى عند وضع الفتحة والكسرة والضمة أن تكون بحجم ثلث قطر قلم الكتابة، مع المحافظة على التوازي التام لزوايا الحركات."
+            }
+        ];
 
-        let lessons = defaultLessons;
-        let activeId = lessons.length > 0 ? lessons[0].id : null;
+        // قراءة البيانات من التخزين المحلي
+        let lessons = JSON.parse(localStorage.getItem('rewaq_v2_lessons')) || defaultLessons;
+        let activeId = lessons[0].id;
 
-        // تحويل روابط يوتيوب إلى رابط تشغيل مدمج Embed
+        // دالة تحويل رابط يوتيوب العادي إلى رابط تضمين Embed
         function getEmbedUrl(url) {
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
             if (match && match[2].length === 11) {
-                return "https://www.youtube.com/embed/" + match[2] + "?rel=0";
+                return "https://www.youtube.com/embed/" + match[2] + "?autoplay=1&rel=0";
             }
             return url;
         }
 
-        // عرض الدرس المختار
+        // تحديث الفيديو المعروض في الشاشة
         function showLesson(id) {
             activeId = id;
             const lesson = lessons.find(item => item.id === id);
@@ -280,13 +403,13 @@
 
             document.getElementById('lessonTitle').textContent = lesson.title;
             document.getElementById('lessonCategory').textContent = lesson.category;
-            document.getElementById('lessonNotes').textContent = lesson.notes || "لا توجد ملاحظات إضافية لهذا الدرس.";
+            document.getElementById('lessonNotes').textContent = lesson.notes || "لا توجد ملاحظات مرفقة بهذا الدرس.";
             document.getElementById('mainIframe').src = getEmbedUrl(lesson.url);
 
             renderPlaylist();
         }
 
-        // بناء قائمة الدروس في الشريط الجانبي
+        // عرض قائمة الدروس
         function renderPlaylist() {
             const listElement = document.getElementById('lessonsList');
             listElement.innerHTML = '';
@@ -303,10 +426,27 @@
             });
         }
 
-        // بدء التشغيل التلقائي عند فتح الصفحة
-        if (activeId !== null) {
-            showLesson(activeId);
-        }
+        // إضافة درس جديد
+        document.getElementById('addForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newLesson = {
+                id: Date.now(),
+                title: document.getElementById('newTitle').value.trim(),
+                category: document.getElementById('newCategory').value,
+                url: document.getElementById('newUrl').value.trim(),
+                notes: document.getElementById('newNotes').value.trim()
+            };
+
+            lessons.unshift(newLesson);
+            localStorage.setItem('rewaq_v2_lessons', JSON.stringify(lessons));
+            
+            this.reset();
+            showLesson(newLesson.id);
+        });
+
+        // تشغيل العرض عند فتح الصفحة
+        renderPlaylist();
     </script>
 </body>
 </html>
