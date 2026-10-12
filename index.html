@@ -4,204 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>رواق الخط العربي / وائل دهشان</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         :root {
             --primary: #0f4c3a;
             --primary-dark: #0a3327;
-            --primary-light: #166e54;
             --accent: #c59b27;
-            --accent-light: #e0b84c;
-            --accent-soft: #fcf8ee;
-            --bg-body: #f8faf9;
+            --accent-light: #fef9e7;
+            --bg-color: #f4f6f5;
             --card-bg: #ffffff;
             --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --border-color: #e5e7eb;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 12px rgba(15, 76, 58, 0.08);
-            --radius-md: 14px;
-            --radius-sm: 8px;
-            --transition: all 0.25s ease;
-        }
-
-        body.dark-theme {
-            --bg-body: #111827;
-            --card-bg: #1f2937;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            --border-color: #374151;
-            --accent-soft: #2c2514;
-            --shadow-md: 0 4px 15px rgba(0,0,0,0.4);
+            --text-muted: #555555;
+            --border: #d1d5db;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-body);
+            background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .calligraphy-title {
-            font-family: 'Amiri', serif;
-        }
-
-        /* Top Header */
+        /* رأس الصفحة */
         header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             color: #ffffff;
-            padding: 1.2rem 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-            position: sticky;
-            top: 0;
-            z-index: 50;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            color: #ffffff;
         }
 
-        .brand-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .brand-icon {
-            font-size: 2.2rem;
+        header p {
             color: var(--accent);
-            background: rgba(255, 255, 255, 0.1);
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(197, 155, 39, 0.4);
-        }
-
-        .brand-text h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-text p {
-            font-size: 0.85rem;
-            color: var(--accent-light);
-            font-weight: 500;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn {
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 0.6rem 1.2rem;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
             font-size: 0.95rem;
+            font-weight: 600;
         }
 
-        .btn-accent {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            color: #1f2937;
-        }
-
-        .btn-accent:hover {
-            box-shadow: 0 4px 14px rgba(197, 155, 39, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn-icon {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            width: 42px;
-            height: 42px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .btn-icon:hover {
-            background: rgba(255, 255, 255, 0.25);
-            color: var(--accent-light);
-        }
-
-        /* Main Workspace Layout */
-        .main-wrapper {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            width: 100%;
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1300px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
             display: grid;
-            grid-template-columns: 1fr 390px;
-            gap: 2rem;
+            grid-template-columns: 1fr 360px;
+            gap: 1.5rem;
             flex-grow: 1;
+            width: 100%;
         }
 
-        @media (max-width: 1024px) {
-            .main-wrapper {
+        @media (max-width: 900px) {
+            .container {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Video Showcase Area */
-        .video-container-card {
+        /* بطاقة مشغل الفيديو */
+        .video-box {
             background: var(--card-bg);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
         }
 
-        .video-viewport {
-            width: 100%;
+        .video-frame-wrap {
             position: relative;
-            background: #000000;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; /* نسبة 16:9 */
             height: 0;
             overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            margin-bottom: 1.2rem;
         }
 
-        .video-viewport iframe,
-        .video-viewport video {
+        .video-frame-wrap iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -210,41 +100,347 @@
             border: none;
         }
 
-        .video-meta-box {
-            padding: 1.8rem;
+        .lesson-info h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
 
-        .badge-category {
+        .category-tag {
             display: inline-block;
-            background: var(--accent-soft);
-            color: var(--accent);
-            border: 1px solid rgba(197, 155, 39, 0.3);
-            padding: 0.3rem 0.9rem;
+            background: var(--accent-light);
+            color: var(--primary);
+            border: 1px solid var(--accent);
+            padding: 0.2rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 700;
+            font-weight: bold;
             margin-bottom: 0.8rem;
         }
 
-        .video-meta-box h2 {
-            font-size: 1.6rem;
-            color: var(--text-main);
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-        }
-
-        .lesson-notes-card {
-            background: var(--accent-soft);
+        .notes-card {
+            background: var(--accent-light);
             border-right: 4px solid var(--accent);
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            padding: 1.2rem;
-            margin-top: 1.2rem;
-            font-size: 0.98rem;
-            line-height: 1.8;
-            color: var(--text-main);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
         }
 
-        .lesson-notes-card h4 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            display
+        .notes-card strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        /* الشريط الجانبي وقائمة الدروس */
+        .sidebar {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        /* استمارة إضافة فيديو جديد */
+        .add-box {
+            background: #fdfdfd;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .add-box h3 {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .input-group {
+            margin-bottom: 0.7rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        /* عناصر القائمة */
+        .playlist {
+            list-style: none;
+            overflow-y: auto;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .playlist-item {
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fff;
+        }
+
+        .playlist-item:hover {
+            background: #f0fdf4;
+            border-color: var(--primary);
+        }
+
+        .playlist-item.active {
+            background: #e6f4ea;
+            border-color: var(--primary);
+            border-right: 4px solid var(--primary);
+            font-weight: bold;
+        }
+
+        .playlist-item h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .playlist-item small {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* أسفل الصفحة */
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- رأس الصفحة -->
+    <header>
+        <h1>رواق الخط العربي / وائل دهشان</h1>
+        <p>منصة تعليمية متخصصة في فنون الخط العربي وقواعد لغة الضاد</p>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="container">
+        
+        <!-- مشغل الفيديو والشرح -->
+        <section class="video-box">
+            <div class="video-frame-wrap">
+                <iframe 
+                    id="mainIframe"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="مشغل الفيديو" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="lesson-info">
+                <span class="category-tag" id="lessonCategory">خط النسخ</span>
+                <h2 id="lessonTitle">الدرس الأول: ميزان حرف الألف وميلانه في خط النسخ</h2>
+                
+                <div class="notes-card">
+                    <strong>القواعد والشواهد التعليمية:</strong>
+                    <p id="lessonNotes">يُقدّر طول الألف في خط النسخ بخمس نقاط بميزان القلم، مع ميلان يسير جداً جهة اليسار من الأعلى لتأمين الرشاقة والتوازن البصري.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- القائمة الجانبية وإضافة الدروس -->
+        <aside class="sidebar">
+            <h2 class="sidebar-title">قائمة الدروس</h2>
+
+            <!-- نموذج إضافة درس جديد -->
+            <div class="add-box">
+                <h3>+ إضافة درس مرئي جديد</h3>
+                <form id="addForm">
+                    <div class="input-group">
+                        <label for="newTitle">عنوان الدرس:</label>
+                        <input type="text" id="newTitle" placeholder="مثال: رسم حرف الراء والزاي" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newCategory">التصنيف الفني:</label>
+                        <select id="newCategory">
+                            <option value="خط النسخ">خط النسخ</option>
+                            <option value="خط الرقعة">خط الرقعة</option>
+                            <option value="اتصال الحروف">اتصال الحروف والقنطرة</option>
+                            <option value="قواعد وإعراب">قواعد وضبط وإعراب</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newUrl">رابط يوتيوب:</label>
+                        <input type="url" id="newUrl" placeholder="https://www.youtube.com/watch?v=..." required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newNotes">القواعد والشواهد:</label>
+                        <textarea id="newNotes" rows="2" placeholder="اكتب القواعد والتوجيهات هنا..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">حفظ الدرس في القائمة</button>
+                </form>
+            </div>
+
+            <!-- قائمة الفيديوهات -->
+            <ul class="playlist" id="lessonsList">
+                <!-- يتم تعبئة الدروس عبر الجافاسكريبت أو افتراضياً -->
+            </ul>
+        </aside>
+
+    </main>
+
+    <!-- أسفل الصفحة -->
+    <footer>
+        &copy; جميع الحقوق محفوظة — رواق الخط العربي / وائل دهشان
+    </footer>
+
+    <!-- سكربت التحكم والتفاعل -->
+    <script>
+        // الدروس الافتراضية
+        const defaultLessons = [
+            {
+                id: 1,
+                title: "الدرس الأول: ميزان حرف الألف وميلانه في خط النسخ",
+                category: "خط النسخ",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "يُقدّر طول الألف في خط النسخ بخمس نقاط بميزان القلم، مع ميلان يسير جداً جهة اليسار من الأعلى لتأمين الرشاقة والتوازن البصري."
+            },
+            {
+                id: 2,
+                title: "الدرس الثاني: قواعد رسم حرفي الباء والتاء",
+                category: "خط النسخ",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "بداية سنّ الباء تبدأ بنقطة مائلة، والاتساع الأفقي يستقر على السطر بمقدار 4 نقاط، مع الارتفاع الرشيق في الطرف الأخير."
+            },
+            {
+                id: 3,
+                title: "الدرس الثالث: فن القنطرة وحالات الوصل بين الأسنان",
+                category: "اتصال الحروف",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "تُستخدم القنطرة لرفع سنّة الحرف فوق السطر عند تتابع الأسنان (مثل: بيت، نبات) لتجنب تشابه الكلمات وتوضيح الحركات."
+            },
+            {
+                id: 4,
+                title: "الدرس الرابع: قواعد التشكيل والضبط الإعرابي",
+                category: "قواعد وإعراب",
+                url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                notes: "يُراعى عند وضع الفتحة والكسرة والضمة أن تكون بحجم ثلث قطر قلم الكتابة، مع المحافظة على التوازي التام لزوايا الحركات."
+            }
+        ];
+
+        // قراءة البيانات من التخزين المحلي
+        let lessons = JSON.parse(localStorage.getItem('rewaq_v2_lessons')) || defaultLessons;
+        let activeId = lessons[0].id;
+
+        // دالة تحويل رابط يوتيوب العادي إلى رابط تضمين Embed
+        function getEmbedUrl(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            if (match && match[2].length === 11) {
+                return "https://www.youtube.com/embed/" + match[2] + "?autoplay=1&rel=0";
+            }
+            return url;
+        }
+
+        // تحديث الفيديو المعروض في الشاشة
+        function showLesson(id) {
+            activeId = id;
+            const lesson = lessons.find(item => item.id === id);
+            if (!lesson) return;
+
+            document.getElementById('lessonTitle').textContent = lesson.title;
+            document.getElementById('lessonCategory').textContent = lesson.category;
+            document.getElementById('lessonNotes').textContent = lesson.notes || "لا توجد ملاحظات مرفقة بهذا الدرس.";
+            document.getElementById('mainIframe').src = getEmbedUrl(lesson.url);
+
+            renderPlaylist();
+        }
+
+        // عرض قائمة الدروس
+        function renderPlaylist() {
+            const listElement = document.getElementById('lessonsList');
+            listElement.innerHTML = '';
+
+            lessons.forEach(lesson => {
+                const li = document.createElement('li');
+                li.className = 'playlist-item ' + (lesson.id === activeId ? 'active' : '');
+                li.innerHTML = `
+                    <h4>${lesson.title}</h4>
+                    <small>التصنيف: ${lesson.category}</small>
+                `;
+                li.onclick = () => showLesson(lesson.id);
+                listElement.appendChild(li);
+            });
+        }
+
+        // إضافة درس جديد
+        document.getElementById('addForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newLesson = {
+                id: Date.now(),
+                title: document.getElementById('newTitle').value.trim(),
+                category: document.getElementById('newCategory').value,
+                url: document.getElementById('newUrl').value.trim(),
+                notes: document.getElementById('newNotes').value.trim()
+            };
+
+            lessons.unshift(newLesson);
+            localStorage.setItem('rewaq_v2_lessons', JSON.stringify(lessons));
+            
+            this.reset();
+            showLesson(newLesson.id);
+        });
+
+        // تشغيل العرض عند فتح الصفحة
+        renderPlaylist();
+    </script>
+</body>
+</html>
